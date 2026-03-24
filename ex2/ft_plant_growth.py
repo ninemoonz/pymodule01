@@ -19,8 +19,7 @@ class plant:
 
 
 plant1 = plant("potato", 27, 30)
-plant2 = plant("tomato", 32, 50)
-plant3 = plant("carrot", 20, 42)
+start_height = plant1.height
 
 
 def ft_plant_growth():
@@ -34,5 +33,7 @@ def ft_plant_growth():
 
     print("=== Day 7===")
     print(plant1.get_info())
+    height_result = plant1.height - start_height
+    print(f"Growth this week: +{height_result} cm")
 
 ft_plant_growth()
