@@ -1,4 +1,41 @@
-import sys
-sys.path.append("../ex1")
+class plant:
+    def __init__(self, name: str, height: int, age: int):
+        self.name = name
+        self.height = height
+        self.age = age
 
-from ft_garden_data import plant
+    def grow(self, cm):
+        self.height += cm
+
+    def age_day(self):
+        self.age += 1
+
+    def get_info(self):
+        return (
+            self.name + ": " +
+            str(self.height) + "cm, " +
+            str(self.age) + " days old"
+            )
+
+
+plant1 = plant("potato", 27, 30)
+plant2 = plant("tomato", 32, 50)
+plant3 = plant("carrot", 20, 42)
+
+
+def ft_plant_growth():
+    days = int(input("how many days will you grow plants?: "))
+    print("=== Day 1 ===")
+    print(plant1.get_info())
+    print(plant2.get_info())
+    print(plant3.get_info())
+
+    for day in range(days):
+        plant1.grow(1)
+        plant1.age_day()
+
+    print("=== Day 7===")
+    print(plant1.get_info())
+    growth = plant1.
+
+ft_plant_growth()
