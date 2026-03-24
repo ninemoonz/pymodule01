@@ -4,7 +4,7 @@ class plant:
         self.height = height
         self.age = age
 
-    def grow(self, cm):
+    def grow(self, cm: int):
         self.height += cm
 
     def age_day(self):
@@ -27,8 +27,6 @@ def ft_plant_growth():
     days = int(input("how many days will you grow plants?: "))
     print("=== Day 1 ===")
     print(plant1.get_info())
-    print(plant2.get_info())
-    print(plant3.get_info())
 
     for day in range(days):
         plant1.grow(1)
@@ -36,6 +34,5 @@ def ft_plant_growth():
 
     print("=== Day 7===")
     print(plant1.get_info())
-    growth = plant1.
 
 ft_plant_growth()
