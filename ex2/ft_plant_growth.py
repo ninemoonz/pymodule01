@@ -4,36 +4,39 @@ class plant:
         self.height = height
         self.age = age
 
-    def grow(self, cm: int):
-        self.height += cm
+    def grow(self):
+        if self.name == "potato":
+            self.height += 2
+        elif self.name == "tomato":
+            self.height += 5
+        elif self.name == "rose":
+            self.height + 3
 
     def age_day(self):
         self.age += 1
 
     def get_info(self):
-        return (
-            self.name + ": " +
-            str(self.height) + "cm, " +
-            str(self.age) + " days old"
-            )
+        return (f"{self.name}: {self.height}cm, {self.age} days old")
 
 
 plant1 = plant("potato", 27, 30)
-start_height = plant1.height
+plant2 = plant("tomato", 30, 14)
+plant3 = plant("rose", 23, 15)
 
 
 def ft_plant_growth():
-    days = int(input("how many days will you grow plants?: "))
+    start_height = plant1.height
     print("=== Day 1 ===")
-    print(plant1.get_info())
+    print(plant2.get_info())
 
-    for day in range(days):
-        plant1.grow(1)
-        plant1.age_day()
+    for day in range(7):
+        plant2.grow()
+        plant2.age_day()
 
     print("=== Day 7===")
-    print(plant1.get_info())
-    height_result = plant1.height - start_height
+    print(plant2.get_info())
+    height_result = plant2.height - start_height
     print(f"Growth this week: +{height_result} cm")
+
 
 ft_plant_growth()
