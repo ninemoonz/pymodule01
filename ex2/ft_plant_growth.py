@@ -8,7 +8,7 @@ class plant:
         if self.name == "potato":
             self.height += 2
         elif self.name == "tomato":
-            self.height += 5
+            self.height = self.height + 5
         elif self.name == "rose":
             self.height + 3
 
@@ -25,7 +25,7 @@ plant3 = plant("rose", 23, 15)
 
 
 def ft_plant_growth():
-    start_height = plant1.height
+    start_height = plant2.height
     print("=== Day 1 ===")
     print(plant2.get_info())
 
