@@ -1,10 +1,17 @@
 class SecurePlant:
     def __init__(self, name: str, height: int, age: int):
         self._name = name
-        self._height = 0
-        self._age = 0
+        self._height = height
+        self._age = age
 
     def set_height(self, x: int):
+       if x < 0:
+           print(
+                f"Invalid operation attempted: "
+                f"height {self._height}cm [REJECTED]\n"
+                f"Security: Negative height rejected"
+            )
+            return
         self._height = x
 
     def get_height(self):
