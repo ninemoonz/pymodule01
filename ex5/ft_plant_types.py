@@ -4,17 +4,17 @@ class Plant:
 		self.height = height
 		self.age = age
 	
-	def get_info(self):
-		print(f"name: {self.name}, height: {self.height}cm, age: {self.age} days")
-
 
 class Flower(Plant):
 	def __init__(self, name: str, height: int, age: int, color: str):
 		super().__init__(name, height, age)
 		self.color = color
 
-	def bloom(self):
-		print(self.name, "bloom")
+	def flower_info(self) -> None:
+		print(f"{self.name} (Flower): {self.height}cm, {self.age} days, {self.color} color")
+
+	def bloom(self) -> None:
+		print(f"{self.name} is blooming beautifully!")
 
 
 class Tree(Plant):
@@ -22,18 +22,40 @@ class Tree(Plant):
 		super().__init__(name, height, age)
 		self.trunk_diameter = trunk_diameter
 
-	def produce_shade(self, s: int):
-		return s
+	def tree_info(self) -> None:
+		print(f"{self.name} (Tree): {self.height}cm, {self.age} days, {self.trunk_diameter}cm diameter")
+
+	def produce_shade(self) -> None:
+		shade = (self.trunk_diameter / 100) * (self.height / 100)
+		print(f"{self.name} provides {shade:.0f} square meters of shade")
 
 class Vegetable(Plant):
 	def __init__(self, name: str, height: int, age: int, harvest_season: str, nutritional_value: str):
 		super().__init__(name, height, age)
 		self.harvest_season = harvest_season
 		self.nutritional_value = nutritional_value
-		
+	
+	def vegetable_info(self) -> None:
+		print(f"{self.name} (Vegetable): {self.height}cm, {self.age} days, {self.harvest_season} harvest")
+
+	def vegetable_nut(self) -> None:
+		print(f"{self.name} is rich in {self.nutritional_value}")
+
 
 if __name__ == "__main__":
 	def ft_plant_types():
-		rose = Flower("Rose", 25, 30, "red")
-		oak = Tree("Oak", 500, 1852, )
+		rose = Flower("rose", 25, 30, "red")
+		oak = Tree("Oak", 500, 1852, 50)
+		carrot = Vegetable("Carrot", 15, 43, "winter", "Vitamin A")
 		print("=== Garden Plant Types ===")
+		print()
+		rose.flower_info()
+		rose.bloom()
+		print()
+		oak.tree_info()
+		oak.produce_shade()
+		print()
+		carrot.vegetable_info()
+		carrot.vegetable_nut()
+
+	ft_plant_types()
