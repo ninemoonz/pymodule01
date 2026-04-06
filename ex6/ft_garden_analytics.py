@@ -2,39 +2,66 @@ class Plant:
 	def __init__(self, name: str, height: int) -> None:
 		self.name = name
 		self.height = height
+	
+	def grow(self):
+		self.height += 1
+		print(f"{self.name} grew 1cm")
 
 
 class FloweringPlant(Plant):
-	def __init__(self, name: str, height: int, color: str):
+	def __init__(self, name: str, height: int, color: str) -> None:
 		super().__init__(name, height)
 		self.color = color
+		self.is_blooming: bool = False
 
+	def bloom(self) -> None:
+		self.is_blooming = True
 
 class PrizeFlower(FloweringPlant):
-	def __init__(self, name: str, height: int, color: str, prize: int):
+	def __init__(self, name: str, height: int, color: str, prize: int) -> None:
 		super().__init__(name, height, color)
 		self.prize = prize
 
-
 class GardenManager:
-	def __init__(self, manager_name: str):
-		self.manager_name = manager_name
+	def __init__(self, owner: str) -> None:
+		self.owner = owner
+		self.plants: list = []
 
-	def add_plant():
-		...
+	def add_plant(self, plant: Plant) -> None:
+		self.plants.append(plant)
+		print(f"Added {plant.name} to {self.owner}'s garden")
 	
-	def grow_plant():
-		...
+	def grow_all(self) -> None:
+		print(f"{self.owner} is helping all plants grow...")
+		for plant in self.plants:
+			plant.grow()
 	
-	def get_report():
+	def get_report(self) -> None:
 		...
 
 	class GardenStats:
 		...
 
+	@classmethod
+	def create_garden_network(cls, name: list) -> list:
+		...
+	
+	@staticmethod
+	def is_valid_height(height: int) -> bool:
+		...
+
 
 if __name__ == "__main__":
 	def ft_garden_analytics():
-		...
+		print("=== Garden Management System Demo")
+		print()
+		alice = GardenManager("Alice")
+		alice.add_plant(Plant("Oak", 100))
+		alice.add_plant(FloweringPlant("Rose", 25, "pink"))
+		alice.add_plant(PrizeFlower("Sun Flower", 120, "yello", 10))
+		print()
+		alice.grow_all()
+		print()
+		
 
 	ft_garden_analytics()
