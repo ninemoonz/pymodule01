@@ -20,6 +20,18 @@ class GardenManager:
 	def __init__(self, manager_name: str):
 		self.manager_name = manager_name
 
+	def add_plant():
+		...
+	
+	def grow_plant():
+		...
+	
+	def get_report():
+		...
+
+	class GardenStats:
+		...
+
 
 if __name__ == "__main__":
 	def ft_garden_analytics():
