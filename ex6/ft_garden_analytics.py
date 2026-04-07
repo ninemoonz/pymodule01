@@ -7,6 +7,9 @@ class Plant:
 		self.height += 1
 		print(f"{self.name} grew 1cm")
 
+	def get_info(self):
+		return f"{self.name}: {self.height}"
+
 
 class FloweringPlant(Plant):
 	def __init__(self, name: str, height: int, color: str) -> None:
@@ -17,10 +20,19 @@ class FloweringPlant(Plant):
 	def bloom(self) -> None:
 		self.is_blooming = True
 
+	def get_info(self) -> None:
+		if self.is_blooming:
+			status = "blooming"
+		else:
+			status = "not blooming"
+		return f"{self.name}: {self.height}cm, {self.color} flower ({status})"
+
+
 class PrizeFlower(FloweringPlant):
 	def __init__(self, name: str, height: int, color: str, prize: int) -> None:
 		super().__init__(name, height, color)
 		self.prize = prize
+
 
 class GardenManager:
 	def __init__(self, owner: str) -> None:
