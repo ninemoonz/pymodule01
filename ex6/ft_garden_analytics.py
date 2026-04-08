@@ -35,14 +35,10 @@ class PrizeFlower(FloweringPlant):
 		self.prize = height / 2
 
 class Garden:
-	def __init__(self) -> None:
-		self.plants: list = []
-
-class GardenManager:
 	def __init__(self, owner: str) -> None:
 		self.owner = owner
 		self.plants: list = []
-
+	
 	def add_plant(self, plant: Plant) -> None:
 		self.plants.append(plant)
 		print(f"Added {plant.name} to {self.owner}'s garden")
@@ -51,9 +47,17 @@ class GardenManager:
 		print(f"{self.owner} is helping all plants grow...")
 		for plant in self.plants:
 			plant.grow()
-	
+
 	def get_report(self) -> None:
 		...
+
+	
+class GardenManager:
+	def __init__(self) -> None:
+		self.gardens: list = []
+
+	def add_garden(self, garden: Garden) -> None:
+		self.gardens.append(garden)
 
 	class GardenStats:
 		...
@@ -70,13 +74,6 @@ class GardenManager:
 if __name__ == "__main__":
 	def ft_garden_analytics():
 		print("=== Garden Management System Demo")
-		print()
-		alice = GardenManager("Alice")
-		alice.add_plant(Plant("Oak", 100))
-		alice.add_plant(FloweringPlant("Rose", 25, "pink"))
-		alice.add_plant(PrizeFlower("Sun Flower", 120, "yello", 10))
-		print()
-		alice.grow_all()
 		print()
 		
 
