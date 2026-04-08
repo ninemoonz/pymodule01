@@ -45,13 +45,12 @@ class SecurePlant:
     def get_info(self) -> None:
         print(f"Current plant: {self._name} ({self._height}cm, {self._age} days)")
 
-
-def ft_garden_security():
-    
-    print("=== Garden Security System ===")
-    plant1 = SecurePlant("Rose", 10, 11)
-    plant1.set_height(15)
-    plant1.get_info()
+if __name__ == "__main__":
+    def ft_garden_security():
+        print("=== Garden Security System ===")
+        plant1 = SecurePlant("Rose", 10, 11)
+        plant1.set_age(-1)
+        plant1.get_info()
 
 
 ft_garden_security()

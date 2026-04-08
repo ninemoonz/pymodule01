@@ -2,7 +2,8 @@ class Plant:
 	def __init__(self, name: str, height: int) -> None:
 		self.name = name
 		self.height = height
-	
+		self.initial_height = height
+		
 	def grow(self):
 		self.height += 1
 		print(f"{self.name} grew 1cm")
@@ -31,8 +32,11 @@ class FloweringPlant(Plant):
 class PrizeFlower(FloweringPlant):
 	def __init__(self, name: str, height: int, color: str, prize: int) -> None:
 		super().__init__(name, height, color)
-		self.prize = prize
+		self.prize = height / 2
 
+class Garden:
+	def __init__(self) -> None:
+		self.plants: list = []
 
 class GardenManager:
 	def __init__(self, owner: str) -> None:
