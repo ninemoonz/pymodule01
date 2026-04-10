@@ -30,13 +30,17 @@ class FloweringPlant(Plant):
 
 
 class PrizeFlower(FloweringPlant):
-	def __init__(self, name: str, height: int, color: str, prize: int) -> None:
+	def __init__(self, name: str, height: int, color: str) -> None:
 		super().__init__(name, height, color)
-		self.prize = prize
 	
+	def get_score(self) -> int:
+		if self.is_blooming:
+			return self.height + 10
+		return self.height
+
 	def get_info(self) -> str:
 		base = super().get_info()
-		return f"{base}, Prize point: {self.prize})"
+		return f"{base}, Prize point: {self.get_score()}"
 
 class Garden:
 	def __init__(self, owner: str) -> None:
@@ -126,7 +130,7 @@ if __name__ == "__main__":
 		
 		tree = Plant("Oak tree", 340)
 		rose = FloweringPlant("Rose", 20, "red")
-		sun = PrizeFlower("Tulip", 1, "blue", 40)
+		sun = PrizeFlower("Tulip", 15, "blue")
 		rose.bloom()
 
 		tyler.add_plant(tree)
