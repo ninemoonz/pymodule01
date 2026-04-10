@@ -133,11 +133,11 @@ if __name__ == "__main__":
         tyler = manager.gardens[0]
         tara = manager.gardens[1]
 
-        tree = Plant("Oak tree", 340)
+        tree = Plant("Oak tree", 174)
         rose = FloweringPlant("Rose", 20, "red")
         sun = PrizeFlower("Tulip", 15, "blue")
         rose.bloom()
-
+        sun.bloom()
         tyler.add_plant(tree)
         tyler.add_plant(rose)
         tyler.add_plant(sun)
@@ -145,7 +145,7 @@ if __name__ == "__main__":
         tara.plants.append(rose)
         print()
 
-        tyler.grow_all(3)
+        tyler.grow_all(6)
         print()
 
         tyler.get_report()
@@ -155,10 +155,10 @@ if __name__ == "__main__":
         all_valid = True
         for garden in manager.gardens:
             for plant in garden.plants:
-                if not GardenManager.is_valid_height(plant.initial_height):
+                if not GardenManager.is_valid_height(plant.initial_height) \
+                        or not GardenManager.is_valid_height(plant.height):
                     all_valid = False
-                elif not GardenManager.is_valid_height(plant.height):
-                    all_valid = False
+        print()
         print(f"Height validation test: {all_valid}")
         print(f"Total gardens managed: {len(manager.gardens)}")
 
