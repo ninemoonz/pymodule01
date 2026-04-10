@@ -4,26 +4,36 @@ class Plant:
         self.height = height
         self.age = age
 
+    def grow(self):
+        if self.name == "Potato":
+            self.height += 3
+        elif self.name == "Tomato":
+            self.height += 2
+        elif self.name == "Bamboo":
+            self.height += 15
+        else:
+            self.height += 1
+
     def get_info(self):
         print(
-            f"Created: {self.name.capitalize()}"
-            f"({self.height}cm, {self.age} days)"
+            f"Created: {self.name}: "
+            f"{self.height}cm, {self.age} days old"
             )
 
-def ft_plant_factory():
-    plants = [
-        Plant("potato", 20, 45),
-        Plant("rose", 28, 12),
-        Plant("tomato", 35, 20),
-        Plant("strawberry", 22, 84),
-        Plant("pepper", 44, 42)
-    ]
 
+def ft_plant_factory(plants: list[Plant]):
     print("=== Plant Factory Output ===")
-    for i, plant in enumerate(plants):
+    for plant in plants:
         plant.get_info()
-    
-    print(f"\nTotal plants created: {len(plants)}")
+
 
 if __name__ == "__main__":
-    ft_plant_factory()
+    plants = [
+        Plant("Bamboo", 20, 45),
+        Plant("Rose", 28, 12),
+        Plant("Tomato", 35, 20),
+        Plant("Strawberry", 22, 84),
+        Plant("Pepper", 44, 42)
+    ]
+
+    ft_plant_factory(plants)
