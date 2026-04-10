@@ -1,42 +1,40 @@
-class plant:
-    def __init__(self, name: str, height: int, age: int):
+class Plant:
+    def __init__(self, name: str, height: int, days: int):
         self.name = name
         self.height = height
-        self.age = age
+        self.days = days
 
     def grow(self):
-        if self.name == "potato":
+        if self.name == "Potato":
+            self.height += 3
+        elif self.name == "Tomato":
             self.height += 2
-        elif self.name == "tomato":
-            self.height = self.height + 5
-        elif self.name == "rose":
-            self.height + 3
+        elif self.name == "Bamboo":
+            self.height += 15
+        else:
+            self.height += 1
 
-    def age_day(self):
-        self.age += 1
+    def age(self):
+        self.days += 1
 
     def get_info(self):
-        return (f"{self.name}: {self.height}cm, {self.age} days old")
+        print(f"{self.name}: {self.height}cm, {self.days} days old")
 
 
-plant1 = plant("potato", 27, 30)
-plant2 = plant("tomato", 30, 14)
-plant3 = plant("rose", 23, 15)
+def week_simulation(plant: Plant, days=7):
+    init_height = plant.height
+    print("=== Garden Plant Growth ===")
+    for i in range(1, days + 1):
+        plant1.get_info()
+        print(f"=== Day {i} ===")
+        plant1.grow()
+        plant1.age()
+    print(f"Growth this week: {plant.height - init_height}cm")
 
 
-def ft_plant_growth():
-    start_height = plant2.height
-    print("=== Day 1 ===")
-    print(plant2.get_info())
+if __name__ == "__main__":
+    plant1 = Plant("Bamboo", 27, 30)
+    plant2 = Plant("Tomato", 30, 14)
+    plant3 = Plant("Rose", 23, 15)
 
-    for day in range(7):
-        plant2.grow()
-        plant2.age_day()
-
-    print("=== Day 7===")
-    print(plant2.get_info())
-    height_result = plant2.height - start_height
-    print(f"Growth this week: +{height_result} cm")
-
-
-ft_plant_growth()
+    week_simulation(plant1)
