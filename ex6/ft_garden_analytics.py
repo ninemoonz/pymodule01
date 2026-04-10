@@ -33,6 +33,10 @@ class PrizeFlower(FloweringPlant):
 	def __init__(self, name: str, height: int, color: str, prize: int) -> None:
 		super().__init__(name, height, color)
 		self.prize = prize
+	
+	def get_info(self) -> str:
+		base = super().get_info()
+		return f"{base}, Prize point: {self.prize})"
 
 class Garden:
 	def __init__(self, owner: str) -> None:
@@ -48,12 +52,18 @@ class Garden:
 		for plant in self.plants:
 			plant.grow(grow)
 
-
 	def get_report(self) -> None:
+		stats = GardenManager.GardenStats(self.plants)
+		total = stats.total_growth()
+		regular, flowering, prize = stats.count_types()
+
 		print(f"=== {self.owner}'s Garden Report ===")
 		print("Plants in garden:")
 		for plant in self.plants:
 			print(f"- {plant.get_info()}")
+		print()
+		print(f"Plants added: {len(self.plants)}, Total growth: {total}cm")
+		print(f"Plant types: {regular} regular, {flowering} flowering, {prize} prize flowers")
 
 	
 class GardenManager:
@@ -64,12 +74,42 @@ class GardenManager:
 		self.gardens.append(garden)
 
 	class GardenStats:
-		def __init__(self) -> None:
-			...
+		def __init__(self, plants: list) -> None:
+			self.plants = plants
+
+		def total_growth(self) -> int:
+			total = 0
+			for plant in self.plants:
+				total += plant.height - plant.initial_height
+			return total
+		
+		def count_types(self) -> tuple:
+			regular = 0
+			flowering = 0
+			prize = 0
+			for plant in self.plants:
+				if isinstance(plant, PrizeFlower):
+					prize += 1
+				elif isinstance(plant, FloweringPlant):
+					flowering += 1
+				else:
+					regular += 1
+			return regular, flowering, prize
+
+	def garden_scores(self) -> None:
+		print(f"Garden scores - ", end="")
+		for garden in self.gardens:
+			score = 0
+			for plant in garden.plants:
+				score += plant.height
+			print(f"{garden.owner}: {score} ", end="")
 
 	@classmethod
-	def create_garden_network(cls, name: list) -> list:
-		...
+	def create_garden_network(cls, names: list) -> GardenManager:
+		manager = cls()
+		for name in names:
+			manager.add_garden(Garden(name))
+		return manager
 	
 	@staticmethod
 	def is_valid_height(height: int) -> bool:
@@ -80,17 +120,35 @@ if __name__ == "__main__":
 	def ft_garden_analytics():
 		print("=== Garden Management System Demo")
 		print()
-		tyler = Garden("Tyler")
+		manager = GardenManager.create_garden_network(["Tyler", "Tara"])
+		tyler = manager.gardens[0]
+		tara = manager.gardens[1]
+		
 		tree = Plant("Oak tree", 340)
 		rose = FloweringPlant("Rose", 20, "red")
-		sun = PrizeFlower("Tulip", 30, "blue", 40)
+		sun = PrizeFlower("Tulip", 1, "blue", 40)
+		rose.bloom()
+
 		tyler.add_plant(tree)
 		tyler.add_plant(rose)
 		tyler.add_plant(sun)
+		tara.plants.append(tree)
+		tara.plants.append(rose)
 		print()
+
 		tyler.grow_all(3)
 		print()
+		
 		tyler.get_report()
+		manager.garden_scores()
+		print()
 
+		all_valid = True
+		for garden in manager.gardens:
+			for plant in garden.plants:
+				if not GardenManager.is_valid_height(plant.initial_height) or not GardenManager.is_valid_height(plant.height):
+					all_valid = False
+		print(f"Height validation test: {all_valid}")
+		print(f"Total gardens managed: {len(manager.gardens)}")
 
 	ft_garden_analytics()
