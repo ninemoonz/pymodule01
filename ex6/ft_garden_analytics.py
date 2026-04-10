@@ -77,7 +77,7 @@ class Garden:
 
 class GardenManager:
     def __init__(self) -> None:
-        self.gardens: list = []
+        self.gardens: list[Garden] = []
 
     def add_garden(self, garden: Garden) -> None:
         self.gardens.append(garden)
