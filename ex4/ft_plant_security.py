@@ -1,8 +1,17 @@
 class SecurePlant:
     def __init__(self, name: str, height: int, age: int) -> None:
-        self._name = name
-        self._height = height
-        self._age = age
+        if len(name) == 0:
+            self._name = ""
+        else:
+            self._name = name
+        if height < 0:
+            self._height = 0
+        else:
+            self._height = height
+        if age < 0:
+            self._age = 0
+        else:
+            self._age = age
 
     def set_name(self, name: str) -> None:
         if len(name) == 0:
@@ -18,10 +27,10 @@ class SecurePlant:
     def set_height(self, height: int) -> None:
         if height < 0:
             print(f"{self._name}: Error, height can't be negative")
-            print("Height update rejected\n")
+            print("Height update rejected")
             return 
         self._height = height
-        print(f"Height Updated: {self._height}cm [OK]")
+        print(f"Height Updated: {self._height}cm")
 
     def get_height(self) -> int:
         return self._height
@@ -32,7 +41,7 @@ class SecurePlant:
             print("Age update rejected")
             return
         self._age = age
-        print(f"Age updated: {self._age} days [OK]")
+        print(f"Age updated: {self._age} days")
 
     def get_age(self) -> int:
         return self._age
@@ -42,22 +51,21 @@ class SecurePlant:
               f"{self._height}cm, {self._age} days old")
 
 
-def ft_garden_security(name: str, height: int, age: int):
-    plant = SecurePlant(name, height, age)
+if __name__ == "__main__":
+    plant = SecurePlant("Rose", 24, 10)
     print("=== Garden Security System ===")
     print(f"Plant created: {plant.get_name()}: "
           f"{plant.get_height()}cm, {plant.get_age()} days old")
     print()
 
-    plant.set_height(height)
-    plant.set_age(age)
+    plant.set_height(30)
+    plant.set_age(25)
 
     plant.get_height()
     plant.get_age()
     print()
+    plant.set_height(-3)
+    plant.set_age(-5)
+    print()
 
     plant.get_info()
-
-
-if __name__ == "__main__":
-    ft_garden_security("Rose", 23, 43)
