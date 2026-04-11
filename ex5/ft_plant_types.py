@@ -9,13 +9,24 @@ class Flower(Plant):
     def __init__(self, name: str, height: int, age: int, color: str):
         super().__init__(name, height, age)
         self.color = color
+        self.bloom = False
 
     def flower_info(self) -> None:
         print(f"{self.name} (Flower): {self.height}cm, "
               f"{self.age} days, {self.color} color")
 
-    def bloom(self) -> None:
-        print(f"{self.name} is blooming beautifully!")
+    def bloom_state(self) -> None:
+        self.bloom = True
+        print(f"[asking the {self.name} to bloom]")
+
+    def show(self) -> None:
+        print("=== Flower")
+        print(f"{self.name}: {self.height}cm, {self.age} days old")
+        print(f"Color: {self.color}")
+        if self.bloom:
+            print(f"{self.name} has bloomed")
+        if not self.bloom:
+            print(f"{self.name} has not bloomed yet")
 
 
 class Tree(Plant):
