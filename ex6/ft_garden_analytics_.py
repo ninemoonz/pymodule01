@@ -18,27 +18,36 @@ class Plant:
 
     def grow(self) -> None:
         self.height += 6
-        self.stat.grow_count += 1
+        self.stat.grow_increment()
 
     def age(self) -> None:
         self.days += 3
-        self.stat.age_count += 1
+        self.stat.age_increment()
 
     def show(self) -> None:
         print(f"{self.name}: {self.height:.1f}cm, {self.days} days old")
-        self.stat.show_count += 1
+        self.stat.show_increment()
 
     class PlantStat:
         def __init__(self, name: str) -> None:
-            self.grow_count = 0
-            self.age_count = 0
-            self.show_count = 0
+            self._grow_count = 0
+            self._age_count = 0
+            self._show_count = 0
             self.name = name
+
+        def grow_increment(self) -> None:
+            self._grow_count += 1
+
+        def age_increment(self) -> None:
+            self._age_count += 1
+
+        def show_increment(self) -> None:
+            self._show_count += 1
 
         def stat_info(self) -> None:
             print(f"[statistics for {self.name}]")
-            print(f"Stats: {self.grow_count} grow, {self.age_count} age, "
-                  f"{self.show_count} show")
+            print(f"Stats: {self._grow_count} grow, {self._age_count} age, "
+                  f"{self._show_count} show")
 
 
 class Flower(Plant):
@@ -85,7 +94,7 @@ class Tree(Plant):
         def __init__(self, name: str) -> None:
             super().__init__(name)
             self.shade = 0
-        
+
         def stat_info(self) -> None:
             super().stat_info()
             print(f"{self.shade} shade")
@@ -117,3 +126,5 @@ if __name__ == "__main__":
     oak.stat.stat_info()
     oak.produce_shade()
     oak.stat.stat_info()
+    print()
+    print("=== Seed")
