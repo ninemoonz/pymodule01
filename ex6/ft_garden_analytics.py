@@ -14,10 +14,9 @@ class Plant:
 
     @classmethod
     def anonymous_plant(cls) -> "Plant":
-        return cls("unknown", 0, 0)
+        return cls("Unknown plant", 0, 0)
 
     def grow(self) -> None:
-        self.height += 6
         self.stat.grow_increment()
 
     def age(self) -> None:
@@ -25,7 +24,7 @@ class Plant:
         self.stat.age_increment()
 
     def show(self) -> None:
-        print(f"{self.name}: {self.height:.1f}cm, {self.days} days old")
+        print(f"{self.name.capitalize()}: {self.height:.1f}cm, {self.days} days old")
         self.stat.show_increment()
 
     class PlantStat:
@@ -45,7 +44,7 @@ class Plant:
             self._show_count += 1
 
         def stat_info(self) -> None:
-            print(f"[statistics for {self.name}]")
+            print(f"[statistics for {self.name.capitalize()}]")
             print(f"Stats: {self._grow_count} grow, {self._age_count} age, "
                   f"{self._show_count} show")
 
@@ -56,19 +55,38 @@ class Flower(Plant):
         self.color = color
         self.bloom_stat = False
 
-    def bloom_grow(self) -> None:
-        print(f"[asking the {self.name} to grow and bloom]")
+    def grow(self) -> None:
+        super().grow()
+        self.height += 4
+
+    def bloom(self) -> None:
         self.bloom_stat = True
-        self.grow()
-        self.age()
 
     def show(self) -> None:
         super().show()
         print(f"Color: {self.color}")
         if self.bloom_stat:
-            print(f"{self.name} is blooming beautifully!")
+            print(f"{self.name.capitalize()} is blooming beautifully!")
         else:
-            print(f"{self.name} has not bloomed yet")
+            print(f"{self.name.capitalize()} has not bloomed yet")
+
+
+class Seed(Flower):
+    def __init__(self, name: str, height: int, age: int, color: str) -> None:
+        super().__init__(name, height, age, color)
+        self.seed = 0
+
+    def grow(self) -> None:
+        super().grow()
+        self.height += 23
+
+    def bloom(self) -> None:
+        super().bloom()
+        self.seed += 134
+
+    def show(self) -> None:
+        super().show()
+        print(f"Seeds: {self.seed}")
 
 
 class Tree(Plant):
@@ -76,6 +94,10 @@ class Tree(Plant):
         super().__init__(name, height, age)
         self.trunk = trunk
         self.stat = Tree.TreeStat(self.name)
+
+    def grow(self) -> None:
+        super().grow()
+        self.height += 12
 
     def show(self) -> None:
         super().show()
@@ -100,31 +122,47 @@ class Tree(Plant):
             print(f"{self.shade} shade")
 
 
-class Seed(Flower):
-    def __init__(self, name: str, height: int, age: int, color: str) -> None:
-        super().__init__(name, height, age, color)
-        self.seed = 0
+def display_stats(plant: Plant) -> None:
+    plant.stat.stat_info()
 
 
 if __name__ == "__main__":
     rose = Flower("rose", 13, 24, "red")
     oak = Tree("oak", 200, 456, 30)
+    sun = Seed("sunflower", 145, 20, "yellow")
 
     print("=== Garden statistics ===")
-    print("Check year-old")
+    print("=== Check year-old")
     Plant.check_year_old(20)
-    Plant.check_year_old(365)
+    Plant.check_year_old(366)
     print()
+
     print("=== Flower")
     rose.show()
-    rose.stat.stat_info()
-    rose.bloom_grow()
+    display_stats(rose)
+    print(f"asking the {rose.name} to grow and bloom")
+    rose.grow()
+    rose.bloom()
     rose.show()
+    display_stats(rose)
     print()
+    
     print("=== Tree")
     oak.show()
-    oak.stat.stat_info()
+    display_stats(oak)
     oak.produce_shade()
-    oak.stat.stat_info()
+    display_stats(oak)
     print()
     print("=== Seed")
+    sun.show()
+    print(f"[make {sun.name} grow, age and bloom]")
+    sun.bloom()
+    sun.age()
+    sun.grow()
+    sun.show()
+    display_stats(sun)
+    print()
+    print("=== Anonymous")
+    unknown = Plant.anonymous_plant()
+    unknown.show()
+    display_stats(unknown)
