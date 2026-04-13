@@ -10,7 +10,7 @@ class Plant:
 
 if __name__ == "__main__":
     plant1 = Plant("Rose", 25, 23)
-    plant2 = Plant("Turlip", 22, 45)
+    plant2 = Plant("Tulip", 22, 45)
     plant3 = Plant("Iris", 23, 13)
 
     print("=== Garden Plant Registry ===")
